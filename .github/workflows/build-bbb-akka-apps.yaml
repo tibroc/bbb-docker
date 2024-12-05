@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
 jobs:
-  docker:
+  build-bbb-akka-apps:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -34,4 +34,4 @@ jobs:
           build-args: |
             "BBB_BUILD_TAG=v3.0.x-release--2024-08-30-014114"
           push: true
-          tags: "${{ GITHUB_REPOSITORY }}:latest"
+          tags: danimo/bbb-docker:latest
