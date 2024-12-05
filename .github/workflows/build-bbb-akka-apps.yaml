@@ -34,4 +34,4 @@ jobs:
           build-args: |
             "BBB_BUILD_TAG=v3.0.x-release--2024-08-30-014114"
           push: true
-          tags: latest/bbb-akka-apps:latest
+          tags: "${{ GITHUB_REPOSITORY }}:latest"
