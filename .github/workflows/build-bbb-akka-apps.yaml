@@ -27,5 +27,10 @@ jobs:
           context: "{{defaultContext}}:mod/apps-akka"
           build-args: |
             "BBB_BUILD_TAG=v3.0.x-release--2024-08-30-014114"
+          additional_contexts:
+            - src-web=./repos/bigbluebutton/bigbluebutton-web
+            - src-common-message=./repos/bigbluebutton/bbb-common-message
+            - src-common-web=./repos/bigbluebutton/bbb-common-web
+
           push: true
           tags: latest/bbb-akka-apps:latest
