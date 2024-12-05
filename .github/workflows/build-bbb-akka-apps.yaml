@@ -1,0 +1,30 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - '*' ### be more conservative
+    paths:
+      - 'mod/apps_akka'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: latest/bbb-akka-apps:latest # use metadata-action output
