@@ -25,5 +25,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}:mod/apps-akka"
+          build-args: |
+            "BBB_BUILD_TAG=v3.0.x-release--2024-08-30-014114"
           push: true
           tags: latest/bbb-akka-apps:latest
