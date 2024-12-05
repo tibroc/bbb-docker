@@ -24,5 +24,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          context: "{{defaultContext}}:mod/apps-akka"
           push: true
           tags: latest/bbb-akka-apps:latest
