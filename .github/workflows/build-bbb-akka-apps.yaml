@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - '*' ### be more conservative
-    paths:
-      - 'mod/apps_akka'
-      - '.github/workflows/build-bbb-akka-apps.yaml'
+#    paths:
+#      - 'mod/apps_akka'
+#      - '.github/workflows/build-bbb-akka-apps.yaml'
+
 jobs:
   docker:
     runs-on: ubuntu-latest
