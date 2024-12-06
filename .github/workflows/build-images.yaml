@@ -38,7 +38,7 @@ jobs:
   nginx:
     uses: ./.github/workflows/build-and-push.yml
     with:
-      image_name: "freeswitch"
+      image_name: "nginx"
       build_tag: "v3.0.x-release--2024-08-30-014114"
       build_contexts: |
         "src-learning-dashboard=./repos/bigbluebutton/bbb-learning-dashboard"
