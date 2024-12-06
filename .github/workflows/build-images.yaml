@@ -6,10 +6,10 @@ on:
       - "**"
 
 jobs:
-  akka-apps:
+  apps-akka:
     uses: ./.github/workflows/build-and-push.yml
     with:
-      image_name: "akka-apps"
+      image_name: "apps-akka"
       build_tag: "v3.0.x-release--2024-08-30-014114"
       build_contexts: |
         "src-common-message=./repos/bigbluebutton/bbb-common-message"
