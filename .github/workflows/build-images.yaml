@@ -1,0 +1,131 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  akka-apps:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "akka-apps"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src-common-message=./repos/bigbluebutton/bbb-common-message"
+        "src-apps-akka=./repos/bigbluebutton/akka-bbb-apps"
+        "src-config=./repos/bigbluebutton/bigbluebutton-html5/private/config/"
+
+  bbb-web:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-web"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src-web=./repos/bigbluebutton/bigbluebutton-web"
+        "src-common-message=./repos/bigbluebutton/bbb-common-message"
+        "src-common-web=./repos/bigbluebutton/bbb-common-web"
+
+  freeswitch:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "freeswitch"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "freeswitch=./repos/freeswitch/"
+        "build-files=./repos/bigbluebutton/build/packages-template/bbb-freeswitch-core/"
+        "fs-config=./repos/bigbluebutton/bbb-voice-conference/config/freeswitch/conf/"
+  nginx:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "freeswitch"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src-learning-dashboard=./repos/bigbluebutton/bbb-learning-dashboard"
+        "src-playback=./repos/bbb-playback"
+        "src-html5=./repos/bigbluebutton/bigbluebutton-html5"
+
+  etherpad:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "etherpad"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "plugin=./repos/bbb-etherpad-plugin"
+        "skin=./repos/bbb-etherpad-skin"
+
+  bbb-pads:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-pads"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src=./repos/bbb-pads"
+
+  bbb-export-annotations:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-export-annotations"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "bigbluebutton=./repos/bigbluebutton"
+
+  webrtc-sfu:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "webrtc-sfu"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "source=./repos/bbb-webrtc-sfu"
+
+  fsesl-akka:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "fsesl-akka"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src-common-message=./repos/bigbluebutton/bbb-common-message"
+        "src-fsesl-client=./repos/bigbluebutton/bbb-fsesl-client"
+        "src-fsesl-akka=./repos/bigbluebutton/akka-bbb-fsesl"
+
+  bbb-graphql-server:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-graphql-server"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src=./repos/bigbluebutton/bbb-graphql-server"
+
+  bbb-graphql-actions:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-graphql-actions"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src=./repos/bigbluebutton/bbb-graphql-actions"
+
+  bbb-graphql-middleware:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-graphql-middleware"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src=./repos/bigbluebutton/bbb-graphql-middleware"
+
+  record-and-playback:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "recordings"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "record-core=./repos/bigbluebutton/record-and-playback/core"
+        "presentation=./repos/bigbluebutton/record-and-playback/presentation"
+        "bbb-conf=./repos/bigbluebutton/bigbluebutton-config"
+
+  bbb-webrtc-recorder:
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      image_name: "bbb-webrtc-recorder"
+      build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_contexts: |
+        "src=./repos/bbb-webrtc-recorder"
