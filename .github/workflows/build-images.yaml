@@ -133,6 +133,8 @@ jobs:
         "record-core=./repos/bigbluebutton/record-and-playback/core"
         "presentation=./repos/bigbluebutton/record-and-playback/presentation"
         "bbb-conf=./repos/bigbluebutton/bigbluebutton-config"
+      build_args: |
+        "TAG_BBB_PRESENTATION_VIDEO=5.0.0-beta.2"
 
   bbb-webrtc-recorder:
     uses: ./.github/workflows/build-and-push.yml
