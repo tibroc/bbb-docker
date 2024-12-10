@@ -47,10 +47,14 @@ jobs:
 
       - name: Extract tags from repo
         run: |
-          for key in "${{ toJson(inputs.additional_tags) }}" | jq -r 'keys[]'; do
-            value=$(echo "${{ toJson(inputs.additional_tags) }}" | jq -r --arg key "$key" '.[$key]')
-            TAG=$(git --git-dir="$value/.git" describe --tags --always)
-            echo "${key}=${TAG}" >> $GITHUB_ENV
+          echo "Extracted tags:"
+          for pair in "${{ inputs.additional_tags }}"; do
+            IFS=$'\n' read -ra pairs <<< "$pair"
+            for p in "${pairs[@]}"; do
+              IFS='=' read -r key repo <<< "$p"
+              TAG=$(git --git-dir="$repo/.git" describe --tags --always)
+              echo "${key}=${TAG}" >> $GITHUB_ENV
+            done
           done
         if: inputs.additional_tags != ''
 
