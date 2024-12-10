@@ -31,6 +31,8 @@ jobs:
     with:
       image_name: "freeswitch"
       build_tag: "v3.0.x-release--2024-08-30-014114"
+      additional_tags:
+        TAG_FREESWITCH: repos/freeswitch
       build_contexts: |
         "freeswitch=./repos/freeswitch/"
         "build-files=./repos/bigbluebutton/build/packages-template/bbb-freeswitch-core/"
@@ -40,6 +42,8 @@ jobs:
     with:
       image_name: "nginx"
       build_tag: "v3.0.x-release--2024-08-30-014114"
+      additional_tags:
+        TAG_PLAYBACK: repos/bbb-playback
       build_contexts: |
         "src-learning-dashboard=./repos/bigbluebutton/bbb-learning-dashboard"
         "src-playback=./repos/bbb-playback"
@@ -50,6 +54,8 @@ jobs:
     with:
       image_name: "etherpad"
       build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_args: |
+        "TAG_ETHERPAD=1.9.4"
       build_contexts: |
         "plugin=./repos/bbb-etherpad-plugin"
         "skin=./repos/bbb-etherpad-skin"
@@ -59,6 +65,8 @@ jobs:
     with:
       image_name: "bbb-pads"
       build_tag: "v3.0.x-release--2024-08-30-014114"
+      additional_tags:
+        TAG_PADS: repos/bbb-pads
       build_contexts: |
         "src=./repos/bbb-pads"
 
@@ -74,6 +82,8 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "webrtc-sfu"
+      additional_tags:
+        TAG_WEBRTC_SFU: repos/bbb-webrtc-sfu
       build_tag: "v3.0.x-release--2024-08-30-014114"
       build_contexts: |
         "source=./repos/bbb-webrtc-sfu"
@@ -93,6 +103,8 @@ jobs:
     with:
       image_name: "bbb-graphql-server"
       build_tag: "v3.0.x-release--2024-08-30-014114"
+      build_args: |
+        "GRAPHQL_ENGINE_TAG=v2.44.0"
       build_contexts: |
         "src=./repos/bigbluebutton/bbb-graphql-server"
 

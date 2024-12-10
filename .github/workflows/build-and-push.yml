@@ -16,6 +16,9 @@ on:
         required: false
         type: string
         default: ''
+      additional_tags:
+        required: false
+        type: map
 
 env:
   REGISTRY: ghcr.io
@@ -37,10 +40,19 @@ jobs:
           submodules: 'true'
 
       - name: Extract TAG_BBB from repo
-        id: extract_tag
+        id: extract_bbb_tag
         run: |
           TAG=$(git --git-dir=repos/bigbluebutton/.git describe --tags --always)
           echo "TAG_BBB=${TAG}" >> $GITHUB_ENV
+
+      - name: Extract tags from repo
+        run: |
+          for key in "${{ toJson(inputs.additional_tags) }}" | jq -r 'keys[]'; do
+            value=$(echo "${{ toJson(inputs.additional_tags) }}" | jq -r --arg key "$key" '.[$key]')
+            TAG=$(git --git-dir="$value/.git" describe --tags --always)
+            echo "${key}=${TAG}" >> $GITHUB_ENV
+          done
+        if: inputs.additional_tags != ''
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
