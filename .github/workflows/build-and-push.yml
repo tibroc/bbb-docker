@@ -18,7 +18,7 @@ on:
         default: ''
       additional_tags:
         required: false
-        type: map
+        type: string
 
 env:
   REGISTRY: ghcr.io
