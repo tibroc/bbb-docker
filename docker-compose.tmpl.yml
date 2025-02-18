@@ -21,15 +21,7 @@ services:
   {{ end }}
 
   bbb-web:
-    build: 
-      context: mod/bbb-web
-      additional_contexts:
-        - src-web=./repos/bigbluebutton/bigbluebutton-web
-        - src-common-message=./repos/bigbluebutton/bbb-common-message
-        - src-common-web=./repos/bigbluebutton/bbb-common-web
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-    image: alangecker/bbb-docker-web:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/bbb-web:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
         - redis
@@ -59,18 +51,9 @@ services:
       bbb-net:
         ipv4_address: 10.7.7.2
 
-
   freeswitch:
     container_name: bbb-freeswitch
-    build: 
-      context: mod/freeswitch
-      additional_contexts:
-        - freeswitch=./repos/freeswitch/
-        - build-files=./repos/bigbluebutton/build/packages-template/bbb-freeswitch-core/
-        - fs-config=./repos/bigbluebutton/bbb-voice-conference/config/freeswitch/conf/
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-    image: alangecker/bbb-docker-freeswitch:{{ .Env.TAG_FREESWITCH }}-{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/freeswitch:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     cap_add:
       - IPC_LOCK
@@ -107,16 +90,7 @@ services:
         compress: "false"
 
   nginx:
-    build:
-      context: mod/nginx
-      additional_contexts:
-        - src-learning-dashboard=./repos/bigbluebutton/bbb-learning-dashboard
-        - src-playback=./repos/bbb-playback
-        - src-html5=./repos/bigbluebutton/bigbluebutton-html5
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-        TAG_BBB: {{ .Env.TAG_BBB }}
-    image: alangecker/bbb-docker-nginx:{{ .Env.TAG_BBB }}-{{ .Env.TAG_PLAYBACK }}-1.25
+    image: ghcr.io/danimo/nginx:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     volumes:
       - ./data/bigbluebutton:/var/bigbluebutton
@@ -139,14 +113,7 @@ services:
       - "bbb-graphql-middleware:10.7.7.32"
 
   etherpad:
-    build: 
-      context: mod/etherpad
-      additional_contexts:
-        - plugin=./repos/bbb-etherpad-plugin
-        - skin=./repos/bbb-etherpad-skin
-      args:
-        TAG_ETHERPAD: "2.2.7"
-    image: alangecker/bbb-docker-etherpad:2.2.7-s{{ .Env.COMMIT_ETHERPAD_SKIN }}-p{{ .Env.COMMIT_ETHERPAD_PLUGIN }}
+    image: ghcr.io/danimo/etherpad:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -158,11 +125,7 @@ services:
         ipv4_address: 10.7.7.4
 
   bbb-pads:
-    build: 
-      context: mod/bbb-pads
-      additional_contexts:
-        - src=./repos/bbb-pads
-    image: alangecker/bbb-docker-pads:{{ .Env.TAG_PADS }}
+    image: ghcr.io/danimo/bbb-pads:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -174,11 +137,7 @@ services:
         ipv4_address: 10.7.7.18
 
   bbb-export-annotations:
-    build:
-      context: mod/bbb-export-annotations
-      additional_contexts:
-        src: ./repos/bigbluebutton/bbb-export-annotations
-    image: alangecker/bbb-docker-bbb-export-annotations:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/bbb-export-annotations:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -209,13 +168,7 @@ services:
         ipv4_address: 10.7.7.5
 
   webrtc-sfu:
-    build: 
-      context: mod/webrtc-sfu
-      additional_contexts:
-        - source=./repos/bbb-webrtc-sfu
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-    image: alangecker/bbb-docker-webrtc-sfu:{{ .Env.TAG_WEBRTC_SFU }}
+    image: ghcr.io/danimo/webrtc-sfu:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -238,15 +191,7 @@ services:
       memlock: -1 # allow io_uring_register_buffers to allocate enough ram
 
   fsesl-akka:
-    build: 
-      context: mod/fsesl-akka
-      additional_contexts:
-        - src-common-message=./repos/bigbluebutton/bbb-common-message
-        - src-fsesl-client=./repos/bigbluebutton/bbb-fsesl-client
-        - src-fsesl-akka=./repos/bigbluebutton/akka-bbb-fsesl
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-    image: alangecker/bbb-docker-fsesl-akka:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/fsesl-akka:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -258,16 +203,7 @@ services:
         ipv4_address: 10.7.7.14
 
   apps-akka:
-    build: 
-      context: mod/apps-akka
-      additional_contexts:
-        - src-common-message=./repos/bigbluebutton/bbb-common-message
-        - src-apps-akka=./repos/bigbluebutton/akka-bbb-apps
-        - src-config=./repos/bigbluebutton/bigbluebutton-html5/private/config/
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-        TAG_BBB: {{ .Env.TAG_BBB }}
-    image: alangecker/bbb-docker-apps-akka:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/apps-akka:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -284,14 +220,7 @@ services:
         ipv4_address: 10.7.7.15
 
   bbb-graphql-server:
-    build:
-      context: mod/bbb-graphql-server
-      additional_contexts:
-        - src=./repos/bigbluebutton/bbb-graphql-server
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-        GRAPHQL_ENGINE_TAG: v2.45.0
-    image: alangecker/bbb-docker-graphql-server:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/bbb-graphql-server:{{ .Env.TAG_BBB }}
     depends_on:
       - postgres
       - bbb-web
@@ -306,19 +235,8 @@ services:
       bbb-net:
         ipv4_address: 10.7.7.31
 
-
   bbb-graphql-actions:
-    build:
-      context: mod/bbb-graphql-actions
-      {{ if isTrue .Env.DEV_MODE }}
-      dockerfile: Dockerfile.dev
-      {{ else }}
-      additional_contexts:
-        - src=./repos/bigbluebutton/bbb-graphql-actions
-      {{ end }}
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-    image: alangecker/bbb-docker-graphql-actions:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/bbb-graphql-actions:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -333,17 +251,7 @@ services:
     {{ end }}
 
   bbb-graphql-middleware:
-    build:
-      context: mod/bbb-graphql-middleware
-      {{ if isTrue .Env.DEV_MODE }}
-      dockerfile: Dockerfile.dev
-      {{ else }}
-      additional_contexts:
-        - src=./repos/bigbluebutton/bbb-graphql-middleware
-      {{ end }}
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-    image: alangecker/bbb-docker-graphql-middleware:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/bbb-graphql-middleware:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - bbb-graphql-server
@@ -378,12 +286,10 @@ services:
     logging:
       driver: none
 
-
   periodic:
     build: mod/periodic
     image: alangecker/bbb-docker-periodic:v3.0.0
     restart: unless-stopped
-
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/bigbluebutton:/var/bigbluebutton
@@ -401,16 +307,7 @@ services:
 {{ if isTrue .Env.ENABLE_RECORDING }}
   # recordings
   recordings:
-    build: 
-      context: mod/recordings
-      additional_contexts:
-        - record-core=./repos/bigbluebutton/record-and-playback/core
-        - presentation=./repos/bigbluebutton/record-and-playback/presentation
-        - bbb-conf=./repos/bigbluebutton/bigbluebutton-config
-      args:
-        BBB_BUILD_TAG: {{ .Env.BBB_BUILD_TAG }}
-        TAG_BBB_PRESENTATION_VIDEO: "5.0.0-beta.2"
-    image: alangecker/bbb-docker-recordings:{{ .Env.TAG_BBB }}
+    image: ghcr.io/danimo/recordings:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -431,11 +328,7 @@ services:
         ipv4_address: 10.7.7.16
 
   bbb-webrtc-recorder:
-    build:
-      context: mod/bbb-webrtc-recorder
-      additional_contexts:
-        - src=./repos/bbb-webrtc-recorder
-    image: alangecker/bbb-docker-webrtc-recorder:{{ .Env.TAG_WEBRTC_RECORDER }}
+    image: ghcr.io/danimo/bbb-webrtc-recorder:{{ .Env.TAG_BBB }}
     depends_on:
       - redis
     volumes: 
@@ -469,8 +362,7 @@ services:
 {{ if isTrue .Env.ENABLE_HTTPS_PROXY }}
 
   haproxy:
-    build: mod/haproxy
-    image: alangecker/bbb-haproxy:2.8.10
+    image: ghcr.io/tomdess/docker-haproxy-certbot:2.8.10
     volumes:
       - ./data/haproxy/letsencrypt:/etc/letsencrypt
       - ./mod/haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg
@@ -507,7 +399,6 @@ services:
     depends_on:
       - postgres
       - redis
-
     environment:
       DATABASE_URL: postgres://postgres:${POSTGRESQL_SECRET:-password}@postgres:5432/greenlight
       REDIS_URL: redis://redis:6379
