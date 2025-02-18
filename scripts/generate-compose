@@ -41,7 +41,7 @@ BBB_BUILD_TAG=v3.0.x-release--2024-08-30-014114
 docker run  \
     --rm  \
     -v $(pwd)/docker-compose.tmpl.yml:/docker-compose.tmpl.yml \
-    -e TAG_BBB=$(get_tag repos/bigbluebutton) \
+    -e TAG_BBB='feat-ci' \
     -e TAG_FREESWITCH=$(get_tag repos/freeswitch) \
     -e TAG_WEBRTC_SFU=$(get_tag repos/bbb-webrtc-sfu) \
     -e TAG_WEBHOOKS=$(get_tag repos/bbb-webhooks) \
