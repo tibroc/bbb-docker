@@ -10,7 +10,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "apps-akka"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src-common-message=./repos/bigbluebutton/bbb-common-message"
         "src-apps-akka=./repos/bigbluebutton/akka-bbb-apps"
@@ -20,7 +20,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-web"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src-web=./repos/bigbluebutton/bigbluebutton-web"
         "src-common-message=./repos/bigbluebutton/bbb-common-message"
@@ -30,7 +30,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "freeswitch"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       additional_tags: |
         "TAG_FREESWITCH=repos/freeswitch"
       build_contexts: |
@@ -41,7 +41,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "nginx"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       additional_tags: |
         "TAG_PLAYBACK=repos/bbb-playback"
       build_contexts: |
@@ -53,7 +53,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "etherpad"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_args: |
         "TAG_ETHERPAD=2.2.7"
       build_contexts: |
@@ -64,7 +64,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-pads"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       additional_tags: |
         "TAG_PADS=repos/bbb-pads"
       build_contexts: |
@@ -74,7 +74,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-export-annotations"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src=./repos/bigbluebutton/bbb-export-annotations"
 
@@ -84,7 +84,7 @@ jobs:
       image_name: "webrtc-sfu"
       additional_tags: |
         "TAG_WEBRTC_SFU=repos/bbb-webrtc-sfu"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "source=./repos/bbb-webrtc-sfu"
 
@@ -92,7 +92,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "fsesl-akka"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src-common-message=./repos/bigbluebutton/bbb-common-message"
         "src-fsesl-client=./repos/bigbluebutton/bbb-fsesl-client"
@@ -102,7 +102,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-graphql-server"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_args: |
         "GRAPHQL_ENGINE_TAG=v2.45.0"
       build_contexts: |
@@ -112,7 +112,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-graphql-actions"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src=./repos/bigbluebutton/bbb-graphql-actions"
 
@@ -120,7 +120,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-graphql-middleware"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src=./repos/bigbluebutton/bbb-graphql-middleware"
 
@@ -128,7 +128,7 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "recordings"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "record-core=./repos/bigbluebutton/record-and-playback/core"
         "presentation=./repos/bigbluebutton/record-and-playback/presentation"
@@ -140,6 +140,6 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     with:
       image_name: "bbb-webrtc-recorder"
-      build_tag: "v3.0.x-release--2025-02-06-143818"
+      build_tag: "v3.0.x-release--2025-03-12-163403"
       build_contexts: |
         "src=./repos/bbb-webrtc-recorder"
