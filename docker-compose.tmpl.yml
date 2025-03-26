@@ -21,7 +21,7 @@ services:
   {{ end }}
 
   bbb-web:
-    image: ghcr.io/danimo/bbb-web:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-web:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
         - redis
@@ -53,7 +53,7 @@ services:
 
   freeswitch:
     container_name: bbb-freeswitch
-    image: ghcr.io/danimo/freeswitch:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/freeswitch:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     cap_add:
       - IPC_LOCK
@@ -90,7 +90,7 @@ services:
         compress: "false"
 
   nginx:
-    image: ghcr.io/danimo/nginx:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/nginx:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     volumes:
       - ./data/bigbluebutton:/var/bigbluebutton
@@ -113,7 +113,7 @@ services:
       - "bbb-graphql-middleware:10.7.7.32"
 
   etherpad:
-    image: ghcr.io/danimo/etherpad:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/etherpad:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -125,7 +125,7 @@ services:
         ipv4_address: 10.7.7.4
 
   bbb-pads:
-    image: ghcr.io/danimo/bbb-pads:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-pads:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -137,7 +137,7 @@ services:
         ipv4_address: 10.7.7.18
 
   bbb-export-annotations:
-    image: ghcr.io/danimo/bbb-export-annotations:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-export-annotations:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -168,7 +168,7 @@ services:
         ipv4_address: 10.7.7.5
 
   webrtc-sfu:
-    image: ghcr.io/danimo/webrtc-sfu:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/webrtc-sfu:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -191,7 +191,7 @@ services:
       memlock: -1 # allow io_uring_register_buffers to allocate enough ram
 
   fsesl-akka:
-    image: ghcr.io/danimo/fsesl-akka:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/fsesl-akka:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -203,7 +203,7 @@ services:
         ipv4_address: 10.7.7.14
 
   apps-akka:
-    image: ghcr.io/danimo/apps-akka:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/apps-akka:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -220,7 +220,7 @@ services:
         ipv4_address: 10.7.7.15
 
   bbb-graphql-server:
-    image: ghcr.io/danimo/bbb-graphql-server:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-graphql-server:{{ .Env.TAG_BBB }}
     depends_on:
       - postgres
       - bbb-web
@@ -236,7 +236,7 @@ services:
         ipv4_address: 10.7.7.31
 
   bbb-graphql-actions:
-    image: ghcr.io/danimo/bbb-graphql-actions:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-graphql-actions:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -251,7 +251,7 @@ services:
     {{ end }}
 
   bbb-graphql-middleware:
-    image: ghcr.io/danimo/bbb-graphql-middleware:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-graphql-middleware:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - bbb-graphql-server
@@ -307,7 +307,7 @@ services:
 {{ if isTrue .Env.ENABLE_RECORDING }}
   # recordings
   recordings:
-    image: ghcr.io/danimo/recordings:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/recordings:{{ .Env.TAG_BBB }}
     restart: unless-stopped
     depends_on:
       - redis
@@ -328,7 +328,7 @@ services:
         ipv4_address: 10.7.7.16
 
   bbb-webrtc-recorder:
-    image: ghcr.io/danimo/bbb-webrtc-recorder:{{ .Env.TAG_BBB }}
+    image: ghcr.io/tibroc/bbb-webrtc-recorder:{{ .Env.TAG_BBB }}
     depends_on:
       - redis
     volumes: 
